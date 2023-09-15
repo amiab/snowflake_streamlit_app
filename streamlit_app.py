@@ -18,14 +18,15 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 
 # list picker  
 fruits_selected = st.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado', 'Strawberries'])
-fruits_to_show = my_fruit_list.loc[fruits_selected]
 
-# Display the table on the page.
-if (fruits_to_show != null)
+if (fruits_selected != null)
 {
-  st.dataframe(fruits_to_show)
+  fruits_to_show = my_fruit_list.loc[fruits_selected] 
 }
 else
 {
-  st.dataframe(my_fruit_list)
+  fruits_to_show = my_fruit_list
 }
+
+# Display the table on the page.
+st.dataframe(fruits_to_show)
