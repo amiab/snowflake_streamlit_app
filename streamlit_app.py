@@ -23,5 +23,9 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 # Display the table on the page.
 if (fruits_to_show != null)
 {
-st.dataframe(fruits_to_show)
+  st.dataframe(fruits_to_show)
+}
+else
+{
+  st.dataframe(my_fruit_list)
 }
