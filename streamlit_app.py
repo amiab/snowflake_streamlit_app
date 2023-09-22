@@ -27,4 +27,10 @@ st.dataframe(fruits_to_show)
 # api call - workshop part 2
 st.header("Workshop part #2 - Fruityvice!")
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response)
+# st.text(fruityvice_response)
+st.text(fruityvice_response.json()) # just write on screen
+
+# write your own comment -what does the next line do? 
+fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
+# write your own comment - what does this do?
+st.dataframe(fruityvice_normalized)
