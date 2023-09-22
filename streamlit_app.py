@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as ps
+import requests
 
 st.title( "Snowflake - ❄️ -" )
 st.header( "Data Application Builders" )
@@ -22,3 +23,7 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 # Display the table on the page.
 st.dataframe(fruits_to_show) 
+
+# api call 
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(fruityvice_response)
