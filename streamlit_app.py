@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as ps
 import requests
+import snowflake.connector
 
 st.title( "Snowflake - ❄️ -" )
 st.header( "Data Application Builders" )
