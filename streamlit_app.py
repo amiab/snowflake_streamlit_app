@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as ps
-import requests
-import snowflake.connector
+import requests as r
+import snowflake.connector as sc
 
 st.title( "Snowflake - ❄️ -" )
 st.header( "Data Application Builders" )
@@ -31,7 +31,7 @@ st.header("Workshop part #2 - Fruityvice!")
 fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
 st.write('The user entered ', fruit_choice)
 
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+fruityvice_response = r.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 # st.text(fruityvice_response)
 # st.text(fruityvice_response.json()) # just write on screen
 
@@ -39,3 +39,11 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_c
 fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do?
 st.dataframe(fruityvice_normalized)
+
+# connect to snowflake DB - workshop final part 
+y_cnx = sc.connect(**streamlit.secrets["snowflake"])
+my_cur = my_cnx.cursor()
+my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+my_data_row = my_cur.fetchone()
+st.text("Hello from Snowflake:")
+st.text(my_data_row)
