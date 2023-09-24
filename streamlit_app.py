@@ -41,7 +41,7 @@ st.header("Workshop part #2 - Fruityvice!")
 #st.dataframe(fruityvice_normalized)
 # *************************************************
 # move the above to TRY CATCH
-try
+try:
   fruit_choice = st.text_input('What fruit would you like information about?')
   if not fruit_choice:
     st.error("Please select a fruit...")
