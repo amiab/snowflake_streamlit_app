@@ -77,15 +77,15 @@ except URLError as e:
 # st.dataframe(my_data_row)
 # ***********************************
 
+st.header("test - Fruit List Data - fetch all:")
+
 # button
 if st.button( 'Get List' ):
   # connect to snowflake DB - workshop final part 
   my_cnx = sc.connect(**st.secrets["snowflake"])
   my_data_rows = get_fruit_list()  
+  st.dataframe(my_data_rows)
   
-st.header("test - Fruit List Data - fetch all:")
-st.dataframe(my_data_rows)
-
 fruit_add = st.text_input('What fruit would you like to add?','jackfruit')
 st.write('Thanks for adding ', fruit_add)
 
