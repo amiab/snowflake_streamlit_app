@@ -10,6 +10,12 @@ def get_fruity_data( myfruit ):
   fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
   return fruityvice_normalized
   
+# function to query snowflake table 
+def get_fruit_list():
+    with my_cnx.cursor() as my_cur:
+      my_cur.execute("select * from fruit_load_list")
+      return my_cur.fetchall()
+  
 st.title( "Snowflake - ❄️ -" )
 st.header( "Data Application Builders" )
 st.text( "Workshop - 15/09/2023" )
@@ -60,17 +66,23 @@ except URLError as e:
 # stopall above streamlit execution
 #st.stop()
 
-# connect to snowflake DB - workshop final part 
-my_cnx = sc.connect(**st.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-# my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_cur.execute("select * from FRUIT_LOAD_LIST")
-my_data_row = my_cur.fetchone()
-my_data_rows = my_cur.fetchall()
-st.text("test - Fruit List Data - fetch one:")
-st.text(my_data_row)
-st.header("test - Fruit List Data - fetch 1st in list:")
-st.dataframe(my_data_row)
+# ******** replaced with function ***
+# my_cur = my_cnx.cursor()
+## my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+# my_cur.execute("select * from FRUIT_LOAD_LIST")
+# my_data_row = my_cur.fetchone()
+# st.text("test - Fruit List Data - fetch one:")
+# st.text(my_data_row)
+# st.header("test - Fruit List Data - fetch 1st in list:")
+# st.dataframe(my_data_row)
+# ***********************************
+
+# button
+if st.button( 'Get List' ):
+  # connect to snowflake DB - workshop final part 
+  my_cnx = sc.connect(**st.secrets["snowflake"])
+  my_data_rows = get_fruit_list()  
+  
 st.header("test - Fruit List Data - fetch all:")
 st.dataframe(my_data_rows)
 
