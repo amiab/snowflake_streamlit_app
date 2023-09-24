@@ -41,7 +41,7 @@ fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
 st.dataframe(fruityvice_normalized)
 
 # connect to snowflake DB - workshop final part 
-y_cnx = sc.connect(**st.secrets["snowflake"])
+my_cnx = sc.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
 my_data_row = my_cur.fetchone()
