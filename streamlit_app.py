@@ -15,7 +15,12 @@ def get_fruit_list():
     with my_cnx.cursor() as my_cur:
       my_cur.execute("select * from fruit_load_list")
       return my_cur.fetchall()
-  
+# function
+def insert_fruit( myfruit ):
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute( "insert into FRUIT_LOAD_LIST values ('from st')" )
+    return 'Thanks for adding ' + myfruit
+    
 st.title( "Snowflake - ❄️ -" )
 st.header( "Data Application Builders" )
 st.text( "Workshop - 15/09/2023" )
@@ -86,7 +91,11 @@ if st.button( 'Get List' ):
   my_data_rows = get_fruit_list()  
   st.dataframe(my_data_rows)
  
-fruit_add = st.text_input('What fruit would you like to add?','jackfruit')
-st.write('Thanks for adding ', fruit_add)
-
-#my_cur.execute( "insert into FRUIT_LOAD_LIST values ('from st')" )
+fruit_add = st.text_input('What fruit would you like to add?')
+if st.button( 'Add...):
+  my_cnx = sc.connect(**st.secrets["snowflake"])
+  ret = insert_fruit(fruit_add)
+  st.text( ret )
+             
+# st.write('Thanks for adding ', fruit_add)
+# my_cur.execute( "insert into FRUIT_LOAD_LIST values ('from st')" )
