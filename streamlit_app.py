@@ -89,12 +89,14 @@ if st.button( 'Get List' ):
   # connect to snowflake DB - workshop final part 
   my_cnx = sc.connect(**st.secrets["snowflake"])
   my_data_rows = get_fruit_list()  
+  my_cnx.close()
   st.dataframe(my_data_rows)
  
 fruit_add = st.text_input('What fruit would you like to add?')
 if st.button( 'Add...'):
   my_cnx = sc.connect(**st.secrets["snowflake"])
   ret = insert_fruit(fruit_add)
+  my_cnx.close()
   st.text( ret )
              
 # st.write('Thanks for adding ', fruit_add)
