@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as ps
 import requests as r
 import snowflake.connector as sc
+from urllib.error import URLError
 
 st.title( "Snowflake - ❄️ -" )
 st.header( "Data Application Builders" )
@@ -27,18 +28,32 @@ st.dataframe(fruits_to_show)
 
 # api call - workshop part 2
 st.header("Workshop part #2 - Fruityvice!")
+# ************************************************
+#fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
+#st.write('The user entered ', fruit_choice)
+#fruityvice_response = r.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+## st.text(fruityvice_response)
+## st.text(fruityvice_response.json()) # just write on screen
 
-fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
-st.write('The user entered ', fruit_choice)
+## write your own comment -what does the next line do? 
+#fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
+## write your own comment - what does this do?
+#st.dataframe(fruityvice_normalized)
+# *************************************************
+# move the above to TRY CATCH
+try
+  fruit_choice = st.text_input('What fruit would you like information about?')
+  if not fruit_choice:
+    st.error("Please select a fruit...")
+  else:
+    fruityvice_response = r.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+    fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
+    st.dataframe(fruityvice_normalized)
+except URLError as e:
+  st.error()
 
-fruityvice_response = r.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-# st.text(fruityvice_response)
-# st.text(fruityvice_response.json()) # just write on screen
-
-# write your own comment -what does the next line do? 
-fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
-# write your own comment - what does this do?
-st.dataframe(fruityvice_normalized)
+# stopall above streamlit execution
+st.stop()
 
 # connect to snowflake DB - workshop final part 
 my_cnx = sc.connect(**st.secrets["snowflake"])
