@@ -54,3 +54,5 @@ st.dataframe(my_data_row)
 st.header("test - Fruit List Data - fetch all:")
 st.dataframe(my_data_rows)
 
+fruit_add = st.text_input('What fruit would you like to add?','jackfruit')
+st.write('Thanks for adding ', fruit_add)
