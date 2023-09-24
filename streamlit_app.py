@@ -5,7 +5,7 @@ import snowflake.connector as sc
 from urllib.error import URLError
 
 # my function
-def get_fruity_date( myfruit ):
+def get_fruity_data( myfruit ):
   fruityvice_response = r.get("https://fruityvice.com/api/fruit/" + myfruit)
   fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
   return fruityvice_normalized
