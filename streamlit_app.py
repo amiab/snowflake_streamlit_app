@@ -58,7 +58,7 @@ except URLError as e:
   st.error()
 
 # stopall above streamlit execution
-st.stop()
+#st.stop()
 
 # connect to snowflake DB - workshop final part 
 my_cnx = sc.connect(**st.secrets["snowflake"])
