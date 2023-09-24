@@ -92,7 +92,7 @@ if st.button( 'Get List' ):
   st.dataframe(my_data_rows)
  
 fruit_add = st.text_input('What fruit would you like to add?')
-if st.button( 'Add...):
+if st.button( 'Add...'):
   my_cnx = sc.connect(**st.secrets["snowflake"])
   ret = insert_fruit(fruit_add)
   st.text( ret )
