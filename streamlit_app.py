@@ -18,7 +18,7 @@ def get_fruit_list():
 # function
 def insert_fruit( myfruit ):
   with my_cnx.cursor() as my_cur:
-    my_cur.execute( "insert into FRUIT_LOAD_LIST values ('from st')" )
+    my_cur.execute( "insert into FRUIT_LOAD_LIST values ('" + myfruit +  "')" )
     return 'Thanks for adding ' + myfruit
     
 st.title( "Snowflake - ❄️ -" )
