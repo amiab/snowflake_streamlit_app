@@ -4,6 +4,12 @@ import requests as r
 import snowflake.connector as sc
 from urllib.error import URLError
 
+# my function
+def get_fruity_date( myfruit )
+  fruityvice_response = r.get("https://fruityvice.com/api/fruit/" + myfruit)
+  fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
+  return fruityvice_normalized
+  
 st.title( "Snowflake - ❄️ -" )
 st.header( "Data Application Builders" )
 st.text( "Workshop - 15/09/2023" )
@@ -46,9 +52,8 @@ try:
   if not fruit_choice:
     st.error("Please select a fruit...")
   else:
-    fruityvice_response = r.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-    fruityvice_normalized = ps.json_normalize(fruityvice_response.json())
-    st.dataframe(fruityvice_normalized)
+    myfruit_data = get_fruity_data(fruit_choice)
+    st.dataframe(myfruit_data)
 except URLError as e:
   st.error()
 
